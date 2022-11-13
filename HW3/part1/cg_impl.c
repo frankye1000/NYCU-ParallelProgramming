@@ -1,4 +1,4 @@
-/*猜測: 瓶頸都在雙迴圈*/
+/*猜測: 瓶頸在雙迴圈*/
 #include "cg_impl.h"
 #include <omp.h>
 
@@ -151,7 +151,7 @@ void sparse(double a[],int colidx[],int rowstr[],int n,int nz,int nozer,int arow
     size = 1.0;
     ratio = pow(rcond, (1.0 / (double)(n)));
 
-    //#pragma omp parallel for  這邊應該是一個大瓶頸
+    // 這邊應該是一個大瓶頸
     for (i = 0; i < n; i++)
     {
         for (nza = 0; nza < arow[i]; nza++)
