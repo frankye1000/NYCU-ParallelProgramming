@@ -15,34 +15,52 @@ int main(int argc, char **argv)
     int world_rank, world_size;
     // ---
 
-    // TODO: MPI init
+    // TODO: init MPI
     MPI_Comm_rank(MPI_COMM_WORLD, &world_rank);
     MPI_Comm_size(MPI_COMM_WORLD, &world_size);
     MPI_Status status;
-    long long int num_task = tosses / world_size;
-    int SEED = 78;
-    int tag = 0;
+    
+    int SEED = 1234;
+    int tag  = 0;
     long long int count = 0;
-
+    long long int num_task = tosses / world_size;
     unsigned int seed = world_rank * SEED, dest = 0;
-    long long int local_cnt = 0;
+    long long int local_count = 0;
     srand(seed);
-    for (long long int toss = 0; toss < num_task; toss++){
+
+    for (long long int toss = 0; toss < num_task; toss++)
+    {
         double x = (double) rand_r(&seed) / RAND_MAX;
         double y = (double) rand_r(&seed) / RAND_MAX;
         double distance = x * x + y * y;
-        if (distance <= 1){
-	   local_cnt++;
+        if (distance <= 1)
+        {
+	        local_count++;
         }
     }
 
-    // TODO: use MPI_Reduce
-    MPI_Reduce(&local_cnt, &count, 1, MPI_UNSIGNED_LONG, MPI_SUM, 0, MPI_COMM_WORLD);
+    if (world_rank > 0)
+    {
+        // TODO: handle workers
+	    MPI_Send(&local_count, 1, MPI_UNSIGNED_LONG, dest, tag, MPI_COMM_WORLD);
+    }
+    else if (world_rank == 0)
+    {
+        // TODO: master
+        count = local_count;
+        long long int buf;
+        for (int i = 1; i < world_size; i++)
+        {
+            // rank 0 收集local count
+	        MPI_Recv(&buf, 1, MPI_UNSIGNED_LONG, i, tag, MPI_COMM_WORLD, &status);
+	        count += buf;
+	    }
+    }
 
     if (world_rank == 0)
     {
-        // TODO: PI result
-	pi_result = 4 * count / (double) tosses;
+        // TODO: process PI result
+	    pi_result = 4 * count / (double) tosses;
 
         // --- DON'T TOUCH ---
         double end_time = MPI_Wtime();

@@ -1,6 +1,6 @@
 CXX=mpicxx
 SRC=main.cc
-SRC+= matrix.cc
+SRC+=matrix.cc
 
 EXE=matmul
 
