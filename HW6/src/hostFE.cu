@@ -2,31 +2,33 @@
 #include <stdlib.h>
 #include <cuda.h>
 #include "helper.h"
-extern "C"{
-#include "hostFE.h"
+extern "C" {
+    #include "hostFE.h"
 }
 
-__global__ void convKernel(int filterWidth, float *filter, int imageHeight, int imageWidth, float *inputImage, float *outputImage){
+__global__ void convolution(int filterWidth, float *filter, int imageHeight, int imageWidth, float *inputImage, float *outputImage){
     int halffilterSize = filterWidth / 2;
     float sum;
     int k, l;
-    int thisX = blockIdx.x * blockDim.x + threadIdx.x;
-    int thisY = blockIdx.y * blockDim.y + threadIdx.y;
+    int ix = blockIdx.x * blockDim.x + threadIdx.x;
+    int iy = blockIdx.y * blockDim.y + threadIdx.y;
 
     sum = 0;
 
-    for (k = -halffilterSize; k <= halffilterSize; k++){
-	for (l = -halffilterSize; l <= halffilterSize; l++){
-	    if (thisY + k >= 0 && thisY + k < imageHeight &&
-		thisX + l >= 0 && thisX + l < imageWidth){
-                sum += inputImage[(thisY + k) * imageWidth + thisX + l] *
-                       filter[(k + halffilterSize) * filterWidth +
-                              l + halffilterSize];
+    for (k = -halffilterSize; k <= halffilterSize; k++)
+    {
+	    for (l = -halffilterSize; l <= halffilterSize; l++)
+        {
+	        if (iy + k >= 0 && iy + k < imageHeight && ix + l >= 0 && ix + l < imageWidth)
+            {
+                    sum += inputImage[(iy + k) * imageWidth + ix + l] *
+                                      filter[(k + halffilterSize) * filterWidth +
+                                            l + halffilterSize];
+	        }
 	    }
-	}
     }
 
-    int idx = thisX + thisY * imageWidth;
+    int idx = ix + iy * imageWidth;
     outputImage[idx] = sum;
 }
 
@@ -48,9 +50,9 @@ void hostFE(int filterWidth, float *filter, int imageHeight, int imageWidth,
     cudaMemcpy(d_filter, filter, filterSize, cudaMemcpyHostToDevice);
     cudaMemcpy(d_inputImage, inputImage, mem_size, cudaMemcpyHostToDevice);
 
-    dim3 threadsPerBlock(25, 25);
+    dim3 threadsPerBlock(20, 20);
     dim3 numBlocks(imageWidth / threadsPerBlock.x, imageHeight / threadsPerBlock.y);
-    convKernel<<<numBlocks, threadsPerBlock>>>(filterWidth, d_filter, imageHeight, imageWidth, d_inputImage, d_outputImage);
+    convolution<<<numBlocks, threadsPerBlock>>>(filterWidth, d_filter, imageHeight, imageWidth, d_inputImage, d_outputImage);
 
     cudaMemcpy(outputImage, d_outputImage, mem_size, cudaMemcpyDeviceToHost);
 
