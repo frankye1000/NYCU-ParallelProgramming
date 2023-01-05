@@ -135,32 +135,27 @@ In addition, we performed kmeans operations on small images (64, 64) and large i
 
 ## 10. Conclusions
 
-* Discuss on small image size
-    * ExeTime: cudaTime > ompTime > seqTime.
-        * parallel calculate the distance from each data point to K cluster centroid, but
-        * The calculation with Sequential is fast.
-        * Because the image is small and the number of pixels is small, the calculation with Sequential is fast.
-        * OpenMP needs to allocate the calculations performed by the thread.
-        * OpenMP thread has to wait for the thread to complete, but the time is relatively long.
-        * CUDA needs to allocate memory at the beginning, and also needs to transfer the data to the memory of the device, so compared with Sequential, it takes a longer time.
+### Discuss on small image size
+**ExeTime: cudaTime > ompTime > seqTime.**
+1. Parallel calculate the distance from each data point to K cluster centroid, but the calculation with Sequential is fast.
+2. Because the image is small and the number of pixels is small, the calculation with Sequential is fast.
+3. OpenMP needs to allocate the calculations performed by the thread.
+4. OpenMP thread has to wait for the thread to complete, but the time is relatively long.
+5. CUDA needs to allocate memory at the beginning, and also needs to transfer the data to the memory of the device, so compared with Sequential, it takes a longer time.        
         
-        
-* Discuss on big image size
-    * ExeTime: ompTime > seqTime.
-        * parallel calculate the distance from each data point to K cluster centroid, but
-        * Small number of clusters;
-        * And the calculation of image RGB only has three dimensions channel, so the calculation is less;
-        * OpenMP spends a lot of time average the centroids of new clusters using the objects inside the clusters. 
-    * ExeTime: cudaTime > seqTime.
-        * CUDA needs to allocate memory at the beginning, and also needs to transfer the data to the memory of the device, so compared with Sequential, it takes a longer time.
+### Discuss on big image size
+**ExeTime: ompTime > seqTime.**
+1. parallel calculate the distance from each data point to K cluster centroid, but Small number of clusters;
+2. And the calculation of image RGB only has three dimensions channel, so the calculation is less;
+3. OpenMP spends a lot of time average the centroids of new clusters using the objects inside the clusters. 
 
-* Discuss on cuda bottleneck
-    * Same image size : ( 256, 256)
-    * When K<32, the time usage of Find near cluster(step 2.、step 3. ) less than the memory carry time.
+### Discuss on cuda bottleneck
+- Same image size : ( 256, 256)
+- When K<32, the time usage of Find near cluster(step 2.、step 3. ) less than the memory carry time.
+    
+![](https://i.imgur.com/RcPPDJa.png)
 
-    ![](https://i.imgur.com/RcPPDJa.png)
-
-* conclusion
+### conclusion
     * small number of cluster、small image size => It is faster to use sequential directly.
     * big number of cluster、big image size => It is faster to use CUDA directly.
     * CUDA Bottleneck will appear in Comput nearest cluster(step 2.、step 3 ).
