@@ -109,12 +109,12 @@ In addition, we performed kmeans operations on small images (64, 64) and large i
 
 * Original image(256,256)
 
-![](https://i.imgur.com/cpLW3mK.jpg =33%x)
+![](https://i.imgur.com/cpLW3mK.jpg =250x250)
 
 
 * After kmeans image(256,256) on k=2
 
-![](https://i.imgur.com/0gZn4Iz.png)
+![](https://i.imgur.com/0gZn4Iz.png =250x250)
 
 * Execution time
 
