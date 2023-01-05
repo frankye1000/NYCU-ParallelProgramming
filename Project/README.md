@@ -83,23 +83,19 @@ In addition, we performed kmeans operations on small images (64, 64) and large i
 
 * Original image(64,64)
 
-![](https://i.imgur.com/ja19kej.jpg)
-
+<img width="64" src="https://i.imgur.com/ja19kej.jpg">
 
 * After kmeans image(64,64) on k=2
 
-![](https://i.imgur.com/mnU1MIC.png)
-
+<img width="64" src="https://i.imgur.com/mnU1MIC.png">
 
 * Execution time
 
-![](https://i.imgur.com/ftMWhhg.png)
-
+<img width="480" src="https://i.imgur.com/ftMWhhg.png">
 
 * Speed up
 
-![](https://i.imgur.com/iovqCBl.png)
-
+<img width="480" src="https://i.imgur.com/iovqCBl.png">
 
 * [video](https://youtube.com/shorts/75vkMmTzOlQ?feature=share)
 
@@ -109,20 +105,20 @@ In addition, we performed kmeans operations on small images (64, 64) and large i
 
 * Original image(256,256)
 
-![|256x256](https://i.imgur.com/cpLW3mK.jpg)
-
+<img width="256" src="https://i.imgur.com/cpLW3mK.jpg">
 
 * After kmeans image(256,256) on k=2
 
-![](https://i.imgur.com/0gZn4Iz.png)
+<img width="256" src="https://i.imgur.com/0gZn4Iz.png">
 
 * Execution time
 
-<img width="256" src="https://i.imgur.com/X8WOMtK.png">
+<img width="480" src="https://i.imgur.com/X8WOMtK.png">
 
 * Speed up
 
-![](https://i.imgur.com/1mdgg4B.png)
+<img width="480" src="https://i.imgur.com/1mdgg4B.png">
+
 
 * [Video](https://youtube.com/shorts/8_6e-Ub8CAY?feature=share)
 
