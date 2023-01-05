@@ -126,10 +126,10 @@ In addition, we performed kmeans operations on small images (64, 64) and large i
 
 ## 9. relative work
 
-以下結果為論文[1]中(300,300)的執行時間比較。
+The following results are the execution time comparison of (300,300) in References[1].
 ![](https://i.imgur.com/MmQsj0X.png)
 
-以下結果為論文[1]中(1164,1200)的執行時間比較。
+The following results are the speed up comparison of (1164,1200) in References[1].
 ![](https://i.imgur.com/XZxljET.png)
 
 
@@ -150,16 +150,16 @@ In addition, we performed kmeans operations on small images (64, 64) and large i
 3. OpenMP spends a lot of time average the centroids of new clusters using the objects inside the clusters. 
 
 ### Discuss on cuda bottleneck
-- Same image size : ( 256, 256)
-- When K<32, the time usage of Find near cluster(step 2.、step 3. ) less than the memory carry time.
+1. Same image size : ( 256, 256)
+2. When K<32, the time usage of Find near cluster(step 2.、step 3. ) less than the memory carry time.
     
 <img width="480" src="https://i.imgur.com/RcPPDJa.png">
 
 ### conclusion
     
-	* small number of cluster、small image size => It is faster to use sequential directly.
-    * big number of cluster、big image size => It is faster to use CUDA directly.
-    * CUDA Bottleneck will appear in Comput nearest cluster(step 2.、step 3 ).
+1. small number of cluster、small image size => It is faster to use sequential directly.
+2. big number of cluster、big image size => It is faster to use CUDA directly.
+3. CUDA Bottleneck will appear in Comput nearest cluster(step 2.、step 3 ).
 	
 <img width="320" src="https://i.imgur.com/09iLlgn.png">
 
