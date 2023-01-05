@@ -114,12 +114,12 @@ In addition, we performed kmeans operations on small images (64, 64) and large i
 
 * After kmeans image(256,256) on k=2
 
-![|256x256](https://i.imgur.com/0gZn4Iz.png)
+![](https://i.imgur.com/0gZn4Iz.png)
 
 * Execution time
 
 ![](https://i.imgur.com/X8WOMtK.png)
-
+<img width="322" alt="2022-04-09_122409" src="https://user-images.githubusercontent.com/7382357/162556478-61a0ff1c-aaba-48ff-9d1b-e9adfb30e6ac.png">
 
 * Speed up
 
