@@ -153,15 +153,15 @@ In addition, we performed kmeans operations on small images (64, 64) and large i
 - Same image size : ( 256, 256)
 - When K<32, the time usage of Find near cluster(step 2.、step 3. ) less than the memory carry time.
     
-![](https://i.imgur.com/RcPPDJa.png)
+<img width="480" src="https://i.imgur.com/RcPPDJa.png">
 
 ### conclusion
-    * small number of cluster、small image size => It is faster to use sequential directly.
+    
+	* small number of cluster、small image size => It is faster to use sequential directly.
     * big number of cluster、big image size => It is faster to use CUDA directly.
     * CUDA Bottleneck will appear in Comput nearest cluster(step 2.、step 3 ).
 	
-![](https://i.imgur.com/09iLlgn.png)
-
+<img width="320" src="https://i.imgur.com/09iLlgn.png">
 
 ## 11. References
 [1] Janki Bhimani 
