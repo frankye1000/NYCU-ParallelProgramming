@@ -118,8 +118,7 @@ In addition, we performed kmeans operations on small images (64, 64) and large i
 
 * Execution time
 
-![](https://i.imgur.com/X8WOMtK.png)
-<img width="322" alt="2022-04-09_122409" src="https://user-images.githubusercontent.com/7382357/162556478-61a0ff1c-aaba-48ff-9d1b-e9adfb30e6ac.png">
+<img width="256" src="https://i.imgur.com/X8WOMtK.png">
 
 * Speed up
 
