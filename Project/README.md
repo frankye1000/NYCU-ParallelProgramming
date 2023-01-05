@@ -155,12 +155,12 @@ The following results are the speed up comparison of (1164,1200) in References[1
     
 <img width="480" src="https://i.imgur.com/RcPPDJa.png">
 
-### conclusion
+### Conclusion
     
 1. small number of cluster、small image size => It is faster to use sequential directly.
 2. big number of cluster、big image size => It is faster to use CUDA directly.
 3. CUDA Bottleneck will appear in Comput nearest cluster(step 2.、step 3 ).
-	
+
 <img width="320" src="https://i.imgur.com/09iLlgn.png">
 
 ## 11. References
